@@ -1,5 +1,6 @@
 
 const express = require('express');
+const color = require('colors');
 const util = require('util');
 const cookie_parser = require('cookie-parser');
 const body_parser = require('body-parser');
@@ -33,9 +34,12 @@ console.log(`You have reached server`);
 app.post('/score', (req, res)=>{
   
     // decrypting the message. 
-    console.log(`Encrypted Payload: ${req.body}`);
-    console.log(`Decrypted Payload${JSON.parse(rsaWrapper.decrypt(rsaWrapper.serverPrivate,req.body.score))}`);
-    res.send(`Decrypted Payload${JSON.parse(rsaWrapper.decrypt(rsaWrapper.serverPrivate,req.body.score))}`);
+    console.log(color.green(req.body));
+    console.log(color.cyan("Payload:"));
+    console.log(JSON.parse(rsaWrapper.decrypt(rsaWrapper.serverPrivate,req.body.score)));
+   // console.log(`Encrypted Payload: ${req.body}`);
+  //  console.log(`Decrypted Payload: ${JSON.parse(rsaWrapper.decrypt(rsaWrapper.serverPrivate,req.body.score))}`);
+    res.send(JSON.parse(rsaWrapper.decrypt(rsaWrapper.serverPrivate,req.body.score)));
 
 });
 
